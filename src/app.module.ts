@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './adapters/app.controller';
-import { AppService } from './application/app.service';
-import { patientProviders } from './application/patient.provider';
-import { DatabaseModule } from './config/database.module';
+import { PatientController } from './adapters/controllers/patient.controller';
+import { PatientService } from './application/services/patient.service';
+import { PatientProvider } from './domain/repository/patient.provider';
+import { DatabaseModule } from './adapters/database/database.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [AppController],
-  providers: [AppService, ...patientProviders],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    DatabaseModule,
+  ],
+  controllers: [PatientController],
+  providers: [PatientService, ...PatientProvider],
 })
 export class AppModule {}
