@@ -1,5 +1,5 @@
 import { HttpStatus } from "@nestjs/common";
-import { IResponse } from "../interfaces/response.interface";
+import { IResponse } from "src/shared/interfaces/response.interface";
 
 export namespace Response {
     export class Standard<T> implements IResponse.Standard<T> {

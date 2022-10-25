@@ -1,21 +1,22 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreatePatientResDto } from 'src/adapters/dto/response/create-patient-res.dto';
 import { CreatePatientReqDto } from 'src/adapters/dto/request/create-patient-req.dto';
 import { Patient } from 'src/domain/entities/patient.entity';
 import { ListPatientResDto } from 'src/adapters/dto/response/list-patient-res.dto';
 import { Response } from 'src/shared/classes/response.class';
 import { IResponse } from 'src/shared/interfaces/response.interface';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class PatientService {
   constructor(
-    @Inject('PATIENT_REPOSITORY')
+    @InjectModel(Patient)
     private patientRepository: typeof Patient,
   ) {}
 
   async create(
     createPatientDto: CreatePatientReqDto,
-  ): Promise<CreatePatientResDto | Response.Standard<any>> {
+  ) {
     try {
       const patient = await this.patientRepository.create<Patient>({
         ...createPatientDto,

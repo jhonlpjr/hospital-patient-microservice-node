@@ -1,5 +1,3 @@
-import { IsNumber } from "@nestjs/class-validator";
-
 export class CreatePatientReqDto {
     Patient_ID: number;
     ID: string;

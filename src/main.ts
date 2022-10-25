@@ -4,7 +4,6 @@ import { MicroserviceOptions } from '@nestjs/microservices';
 import { Transport } from '@nestjs/microservices/enums/transport.enum';
 import { RcpExceptionFilter } from './shared/interceptor/exception';
 
-
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
